@@ -27,6 +27,11 @@ class Concert
      */
     private $title;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     * @Assert\NotBlank()
+     */
+    private $date;
 
     /**
      * @ORM\Column(type="string", length=50)
@@ -50,11 +55,6 @@ class Concert
      */
     private $lineUps;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $dateString;
-
     public function __construct()
     {
         $this->lineUps = new ArrayCollection();
@@ -77,6 +77,17 @@ class Concert
         return $this;
     }
 
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeInterface $date): self
+    {
+        $this->date = $date;
+
+        return $this;
+    }
 
     public function getCategory(): ?string
     {
@@ -141,18 +152,6 @@ class Concert
                 $lineUp->setConcertId(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getDateString(): ?string
-    {
-        return $this->dateString;
-    }
-
-    public function setDateString(string $dateString): self
-    {
-        $this->dateString = $dateString;
 
         return $this;
     }

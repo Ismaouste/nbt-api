@@ -100,13 +100,11 @@ class ArtistController extends AbstractController
     }
 
     /**
-     * @Rest\Put("/{id}")
+     * @Rest\Patch("/{id}")
      */
     public function edit(Request $request, int $id)
     {
-        $data=
         $artist = $this->repository->find($id);
-
         if ($artist == null) {
             return $this->json("Not found", 404);
         }
