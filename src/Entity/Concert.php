@@ -27,11 +27,7 @@ class Concert
      */
     private $title;
 
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     * @Assert\NotBlank()
-     */
-    private $date;
+
 
     /**
      * @ORM\Column(type="string", length=50)
@@ -45,7 +41,7 @@ class Concert
     private $fee;
 
     /**
-     * @ORM\Column(type="string", length=40)
+     * @ORM\Column(type="string", length=40, nullable=true)
      * @Assert\NotBlank()
      */
     private $feeCurrency;
@@ -54,6 +50,13 @@ class Concert
      * @ORM\OneToMany(targetEntity=LineUp::class, mappedBy="concertId", orphanRemoval=true)
      */
     private $lineUps;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     */
+    private $date_string;
+
 
     public function __construct()
     {
@@ -77,17 +80,7 @@ class Concert
         return $this;
     }
 
-    public function getDate(): ?\DateTimeInterface
-    {
-        return $this->date;
-    }
 
-    public function setDate(\DateTimeInterface $date): self
-    {
-        $this->date = $date;
-
-        return $this;
-    }
 
     public function getCategory(): ?string
     {
@@ -152,6 +145,18 @@ class Concert
                 $lineUp->setConcertId(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDateString(): ?string
+    {
+        return $this->date_string;
+    }
+
+    public function setDateString(string $date_string): self
+    {
+        $this->date_string = $date_string;
 
         return $this;
     }

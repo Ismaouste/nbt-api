@@ -100,7 +100,7 @@ class ArtistController extends AbstractController
     }
 
     /**
-     * @Rest\Patch("/{id}")
+     * @Rest\Put("/{id}")
      */
     public function edit(Request $request, int $id)
     {
@@ -123,7 +123,6 @@ class ArtistController extends AbstractController
                     'name' => $artist->getName(),
                 ]
             );
-            // si c'est le même livre ce n'est pas une erreur
             if ($existingArtist != null && $existingArtist->getId()!=$artist->getId()) {
                 return $this->json("Duplicate name",409);
             }

@@ -100,7 +100,7 @@ class ConcertController extends AbstractController
     }
 
     /**
-     * @Rest\Patch("/{id}")
+     * @Rest\Put("/{id}")
      */
     public function edit(Request $request, int $id)
     {
@@ -123,7 +123,6 @@ class ConcertController extends AbstractController
                     'title' => $concert->getTitle(),
                 ]
             );
-            // si c'est le même livre ce n'est pas une erreur
             if ($existingConcert != null && $existingConcert->getId()!=$concert->getId()) {
                 return $this->json("Duplicate title",409);
             }
