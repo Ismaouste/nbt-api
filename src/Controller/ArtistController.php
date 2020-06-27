@@ -14,10 +14,10 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * @Rest\Route("/api/artists")
  */
-class ArtistController extends AbstractController
+class ArtistController extends AbstractRestController
 {
-    private $entityManager;
-    private $repository;
+    public $entityManager;
+    public $repository;
 
     public function __construct(
         EntityManagerInterface $entityManager,
@@ -115,9 +115,9 @@ class ArtistController extends AbstractController
 
         if ($form->isValid()) {
 
-            // on n'autorise pas un livre avec un couple title/author déja existant
+            // Can't add new artist if name already exists
 
-            // VERSION 1 AVEC LES METHODES DU REPOSITORY DE BASE
+            // Using basic repository methods
              $existingArtist = $this->repository->findOneBy(
                 [
                     'name' => $artist->getName(),
@@ -130,5 +130,6 @@ class ArtistController extends AbstractController
         } else {
             return $this->json($form, 400);
         }
+
     }
 }

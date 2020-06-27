@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * @Rest\Route("/api/concerts")
  */
-class ConcertController extends AbstractController
+class ConcertController extends AbstractRestController
 {
     private $entityManager;
     private $repository;
@@ -117,7 +117,7 @@ class ConcertController extends AbstractController
 
             // Can't add new concert if title already exists
 
-            // VERSION 1 AVEC LES METHODES DU REPOSITORY DE BASE
+            // Using basic repository methods
             $existingConcert = $this->repository->findOneBy(
                 [
                     'title' => $concert->getTitle(),
@@ -130,5 +130,6 @@ class ConcertController extends AbstractController
         } else {
             return $this->json($form, 400);
         }
+
     }
 }

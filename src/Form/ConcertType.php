@@ -13,7 +13,7 @@ class ConcertType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('date')
+            ->add('date_string')
             ->add('category')
             ->add('fee')
             ->add('feeCurrency')
