@@ -3,7 +3,10 @@
 namespace App\Entity;
 
 use App\Repository\LineUpRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=LineUpRepository::class)
@@ -20,16 +23,19 @@ class LineUp
     /**
      * @ORM\ManyToOne(targetEntity=Concert::class, inversedBy="lineUps")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotBlank()
      */
     private $concertId;
 
     /**
      * @ORM\ManyToOne(targetEntity=Artist::class, inversedBy="lineUps")
+     * @Assert\NotBlank()
      */
     private $artistId;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank()
      */
     private $position;
 
